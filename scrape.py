@@ -41,10 +41,14 @@ class Scrape:
         return property, unit, resident
 
     def compare_resident(self, resident):
-        RM_resident_element = self.webdriver.driver.find_element(
-            By.XPATH, self.resident_xpath
-        )
-        RM_resident = RM_resident_element.get_attribute("innerHTML").strip()
-        if resident in RM_resident:
-            return True
-        return False
+        try:
+            RM_resident_element = self.webdriver.driver.find_element(
+                By.XPATH, self.resident_xpath
+            )
+            RM_resident = RM_resident_element.get_attribute("innerHTML").strip()
+            if resident in RM_resident:
+                return True
+            else:
+                return False
+        except NoSuchElementException:
+            return False

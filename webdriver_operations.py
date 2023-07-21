@@ -82,12 +82,10 @@ class WebdriverOperations:
         ledger_link = self.driver.find_element(By.XPATH, ledger_xpath)
         ledger_link.click()
 
-    def search_former(self, resident):
-        former_resident = self.driver.find_element(
-            By.XPATH,
-            "/html/body/table[2]/tbody/tr[4]/td/table/tbody/tr/td/table[3]/tbody/tr[1]/td/table/tbody/tr/td[3]/input[2]",
-        )
-        former_resident.click()
+    def search_resident(self, resident, num):
+        select_btn = f"/html/body/table[2]/tbody/tr[4]/td/table/tbody/tr/td/table[3]/tbody/tr[1]/td/table/tbody/tr/td[3]/input[{num}]"
+        btn = self.driver.find_element(By.XPATH, select_btn)
+        btn.click()
         spacenum = self.driver.find_element(By.NAME, "ressearch")
         spacenum.clear()
         spacenum.send_keys(resident)
